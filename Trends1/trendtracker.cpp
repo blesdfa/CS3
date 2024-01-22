@@ -1,4 +1,5 @@
 #include "trendtracker.h"
+#include <iostream>
 
 Trendtracker::Trendtracker() {}
 

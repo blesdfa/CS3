@@ -280,18 +280,6 @@ int main()
 	test(R[0] == "#C++");
 	test(R[1] == "#cs4all");
 	test(R[2] == "#programming");
-    int biggest = 0;
-    vector<int> nums;
-    nums.push_back(4);
-    nums.push_back(6);
-    nums.push_back(1);
-    nums.push_back(15);
-    nums.push_back(8);
-    nums.push_back(7);
-    nums.push_back(6);
-    nums.push_back(24);
-    nums.push_back(31);
-    nums.push_back(29);
 
 
 	//Testing remove()
@@ -349,12 +337,13 @@ int main()
 	}
 
 	T4.top_k_trends(R, 50);
+
 	test(R[2] == "#up");
 	test(R[5] == "#so");
 	test(R[10] == "#ok");
 	test(R[15] == "#me");
 	test(R[29] == "#finishing");
 	test(R[32] == "#quieting");
-    
+
 	cout << "Assignment complete." << endl;
 }
