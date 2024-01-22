@@ -19,72 +19,36 @@ class Trendtracker
 		// Creates a new Trendtracker tracking no hashtags.
 		//
 		// Must run in O(1) time.
-		Trendtracker() {};
+		Trendtracker();
 
 		// Inserts a hashtag (tweeted 0 times) into the Trendtracker.
 		// If the hashtag already is in Trendtracker, does nothing.
 		//
 		// Must run in O(n) time.
-		void insert(string ht) {
-
-            for (int i = 0; i < E.size(); i++) {
-                if (E[i].hashtag == ht) {
-                    return;
-                }
-            }
-            Entry x;
-            x.hashtag = ht;
-            x.pop = 0;
-            E.push_back(x);
-        }
+		void insert(string ht);
 
 		// Return the number of hashtags in the Trendtracker.
 		//
 		// Must run in O(1) time.
-		int size() {
-            return E.size();
-        }
+		int size();
 
 		// Adds 1 to the total number times a hashtag has been tweeted.
 		// If the hashtag does not exist in TrendTracker, does nothing.
 		//
 		// Must run in O(n) time.
-		void tweeted(string ht) {
-            for (int i = 0; i < E.size(); i++) {
-                if (E[i].hashtag == ht) {
-                    E[i].pop++;
-                }
-            }
-        }
+		void tweeted(string ht);
 
 		// Returns the number of times a hashtag has been tweeted.
 		// If the hashtag does not exist in Trendtracker, returns -1.
 		//
 		// Must run in O(n) time.
-		int popularity(string name) {
-            for (int i = 0; i < E.size(); i++) {
-                if (E[i].hashtag == name) {
-                    return E[i].pop;
-                }
-            }
-            return -1;
-        }
+		int popularity(string name);
 
 		// Returns a most-tweeted hashtag.
 		// If the Trendtracker has no hashtags, returns "".
 		//
 		// Must run in O(n) time.
-		string top_trend() {
-            int biggest = E[0].pop;
-            string topString = "";
-            for (int i = 1; i < E.size(); i++) {
-                if (biggest < E[i].pop) {
-                    biggest = E[i].pop;
-                    topString = E[i].hashtag;
-                }
-            }
-            return "test";
-        }
+		string top_trend();
 
 		// Fills the provided vector with the 3 most-tweeted hashtags,
 		// in order from most-tweeted to least-tweeted.
