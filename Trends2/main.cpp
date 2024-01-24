@@ -109,7 +109,6 @@ int main()
 	test(T1.popularity("#cs4all") == 2);
 	test(T1.popularity("#programming") == 3);
 	test(T1.popularity("#C++") == 0);
-
         
 
 	// Test top_trend(), top_three_trends()
@@ -152,11 +151,11 @@ int main()
 	test(R[1] == "#algorithms");
 	test(R[2] == "#C++");
         
-	// // At this point:
-	// // cs4all: 4
-	// // algorithms: 3
-	// // C++: 2
-	// // programming: 1
+	// At this point:
+	// cs4all: 4
+	// algorithms: 3
+	// C++: 2
+	// programming: 1
 
 	T3.tweeted("#programming");
 	T3.tweeted("#programming");
@@ -185,11 +184,11 @@ int main()
 	test(R[1] == "#programming");
 	test(R[2] == "#algorithms");
 	 
-	// // At this point:
-	// // cs4all: 6
-	// // programming: 5
-	// // algorithms: 4
-	// // C++: 2
+	// At this point:
+	// cs4all: 6
+	// programming: 5
+	// algorithms: 4
+	// C++: 2
 
 	for (int i = 0; i < 10000; ++i)
 		T3.tweeted("#C++");
@@ -223,7 +222,7 @@ int main()
 	test(T4.popularity("#be") == 5);
 	test(T4.popularity("#challenging") == 5);
 
-	// test(T4.top_trend() == "#programming");
+	test(T4.top_trend() == "#programming");
 
 	T4.top_three_trends(R);
 	test(R[0] == "#programming");
