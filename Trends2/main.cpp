@@ -34,46 +34,46 @@ int main()
 	test(T1.popularity("#programming") == 0);
 	test(T1.popularity("#C++") == 0);
 
-	// T1.tweeted("#programming");
-	// test(T1.popularity("#algorithms") == 0);
-	// test(T1.popularity("#cs4all") == 0);
-	// test(T1.popularity("#datastructures") == -1);
-	// test(T1.popularity("#programming") == 1);
-	// test(T1.popularity("#C++") == 0);
+	T1.tweeted("#programming");
+	test(T1.popularity("#algorithms") == 0);
+	test(T1.popularity("#cs4all") == 0);
+	test(T1.popularity("#datastructures") == -1);
+	test(T1.popularity("#programming") == 1);
+	test(T1.popularity("#C++") == 0);
 
-	// T1.tweeted("#programming");
-	// test(T1.popularity("#algorithms") == 0);
-	// test(T1.popularity("#cs4all") == 0);
-	// test(T1.popularity("#datastructures") == -1);
-	// test(T1.popularity("#programming") == 2);
-	// test(T1.popularity("#C++") == 0);
+	T1.tweeted("#programming");
+	test(T1.popularity("#algorithms") == 0);
+	test(T1.popularity("#cs4all") == 0);
+	test(T1.popularity("#datastructures") == -1);
+	test(T1.popularity("#programming") == 2);
+	test(T1.popularity("#C++") == 0);
 
-	// T1.tweeted("#programming");
-	// test(T1.popularity("#algorithms") == 0);
-	// test(T1.popularity("#cs4all") == 0);
-	// test(T1.popularity("#datastructures") == -1);
-	// test(T1.popularity("#programming") == 3);
-	// test(T1.popularity("#C++") == 0);
+	T1.tweeted("#programming");
+	test(T1.popularity("#algorithms") == 0);
+	test(T1.popularity("#cs4all") == 0);
+	test(T1.popularity("#datastructures") == -1);
+	test(T1.popularity("#programming") == 3);
+	test(T1.popularity("#C++") == 0);
 
-	// T1.tweeted("#cs4all");
-	// test(T1.popularity("#algorithms") == 0);
-	// test(T1.popularity("#cs4all") == 1);
-	// test(T1.popularity("#programming") == 3);
-	// test(T1.popularity("#C++") == 0);
+	T1.tweeted("#cs4all");
+	test(T1.popularity("#algorithms") == 0);
+	test(T1.popularity("#cs4all") == 1);
+	test(T1.popularity("#programming") == 3);
+	test(T1.popularity("#C++") == 0);
 
-	// T1.tweeted("#algorithms");
-	// test(T1.popularity("#algorithms") == 1);
-	// test(T1.popularity("#cs4all") == 1);
-	// test(T1.popularity("#datastructures") == -1);
-	// test(T1.popularity("#programming") == 3);
-	// test(T1.popularity("#C++") == 0);
+	T1.tweeted("#algorithms");
+	test(T1.popularity("#algorithms") == 1);
+	test(T1.popularity("#cs4all") == 1);
+	test(T1.popularity("#datastructures") == -1);
+	test(T1.popularity("#programming") == 3);
+	test(T1.popularity("#C++") == 0);
 
-	// T1.tweeted("#cs4all");
-	// test(T1.popularity("#algorithms") == 1);
-	// test(T1.popularity("#cs4all") == 2);
-	// test(T1.popularity("#datastructures") == -1);
-	// test(T1.popularity("#programming") == 3);
-	// test(T1.popularity("#C++") == 0);
+	T1.tweeted("#cs4all");
+	test(T1.popularity("#algorithms") == 1);
+	test(T1.popularity("#cs4all") == 2);
+	test(T1.popularity("#datastructures") == -1);
+	test(T1.popularity("#programming") == 3);
+	test(T1.popularity("#C++") == 0);
 
 	// T1.tweeted("#datastructures");
 	// test(T1.popularity("#algorithms") == 1);
@@ -109,9 +109,10 @@ int main()
 	// test(T1.popularity("#cs4all") == 2);
 	// test(T1.popularity("#programming") == 3);
 	// test(T1.popularity("#C++") == 0);
+
         
 
-	// // Test top_trend(), top_three_trends()
+	// Test top_trend(), top_three_trends()
 	// Trendtracker T3("small.txt");
 	// T3.top_three_trends(R);
 	// test(R.size() == 3);
