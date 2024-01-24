@@ -242,8 +242,6 @@ int main()
 	T5.top_three_trends(R);
 	test(R.size() == 1);
 	test(R[0] == "#solo");
-
-
 	cout << "Assignment complete." << endl;
 }
 

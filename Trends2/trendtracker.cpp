@@ -1,5 +1,4 @@
 #include "trendtracker.h"
-#include <iostream>
 
 
 
@@ -52,14 +51,16 @@ void Trendtracker::tweeted(string ht) {
     if (index != -1) {
         E[index].pop++;
     }
+
+    if (E.size() < 3) {
+        return;
+    }
     
     int top = S[0];
     int second = S[1];
     int third = S[2];
-    // cout << "Start of if blocks|| " << top << second << third << endl;
 
     if (E[index].pop > E[top].pop) {
-        cout << "check 1" << endl;
         second = top;
         top = index;
         S[0] = top;
@@ -69,7 +70,7 @@ void Trendtracker::tweeted(string ht) {
         if (E[index].hashtag == E[top].hashtag) {
             return;
         }
-        cout << "check 2" << endl;
+
         third = second;
         second = index;
         S[1] = second;
@@ -79,8 +80,7 @@ void Trendtracker::tweeted(string ht) {
         if (E[index].hashtag == E[second].hashtag) {
             return;
         }
-        cout << E[index].hashtag << endl;
-        cout << "check 3" << endl;
+        
         third = index;
         S[2] = third;
     }
@@ -109,12 +109,14 @@ void Trendtracker::top_three_trends(vector<string> &T) {
     int top = S[0];
     int second = S[1];
     int third = S[2];
-    cout << top << " | " <<  second << " | " << third << endl;
+
+    // For some reason if I don't add this block the code wont run on my windows desktop but runs fine on my mac---This is for the very last test it doesn't say it fails it just doesn't print out "assignment complete"
 
     if (E.size() == 1) {
         T.push_back(E[top].hashtag);
         return;
     }
+
     T.push_back(E[top].hashtag);
     T.push_back(E[second].hashtag);
     T.push_back(E[third].hashtag);
