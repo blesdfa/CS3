@@ -7,17 +7,19 @@ Trendtracker::Trendtracker(string filename) {
     ifstream myFile(filename);
     string hashtag;
     Entry input;
+    int count = 0;
     if (myFile.is_open()) {
         while (getline(myFile, hashtag)) {
             input.hashtag = hashtag;
             input.pop = 0;
             E.push_back(input);
+            if (count < 3) {
+                S.push_back(count);
+                count++;
+            }
         }
         myFile.close();
     }
-    S.push_back(-1);
-    S.push_back(-1);
-    S.push_back(-1);
 }
 
 int Trendtracker::search(string ht) {
@@ -50,73 +52,38 @@ void Trendtracker::tweeted(string ht) {
     if (index != -1) {
         E[index].pop++;
     }
-    cout << "TEST HERE!!!" << E[index].hashtag << E[index].pop << endl;
+    
     int top = S[0];
     int second = S[1];
     int third = S[2];
+    // cout << "Start of if blocks|| " << top << second << third << endl;
 
-    cout << "THIS IS AT THE TOP|| " << E[top].hashtag << ": " << E[top].pop << endl;
-    S.push_back(top);
-    S.push_back(second);
-    S.push_back(third);
-
-    if (E[index].pop > E[top].pop || top == -1) {
-        third = second;
+    if (E[index].pop > E[top].pop) {
+        cout << "check 1" << endl;
         second = top;
         top = index;
         S[0] = top;
         S[1] = second;
-        S[2] = third;
-        cout << "check 1" << endl;
-        cout << top << second << third << endl;
-        cout << E[index].pop << "|||| " << E[top].pop << endl; 
-        for (int i = 0; i < E.size(); i++) {
-            cout << E[i].hashtag << " pop: " << E[i].pop << endl;
-        }
     }
-    if (E[index].pop > E[second].pop || second == -1) {
-        if (E[index].pop == E[top].pop) {
+    else if (E[index].pop > E[second].pop) {
+        if (E[index].hashtag == E[top].hashtag) {
             return;
         }
+        cout << "check 2" << endl;
         third = second;
         second = index;
         S[1] = second;
         S[2] = third;
-        cout << "check 2" << endl;
-        cout << top << second << third << endl;
     }
-    if (E[index].pop > E[third].pop || third == -1) {
-         if (E[index].pop == E[top].pop) {
+    else if (E[index].pop > E[third].pop) {
+        if (E[index].hashtag == E[second].hashtag) {
             return;
-         }
-         if (E[index].pop == E[second].pop) {
-            return;
-         }
+        }
+        cout << E[index].hashtag << endl;
+        cout << "check 3" << endl;
         third = index;
         S[2] = third;
-        cout << "check 3" << endl;
-        cout << top << second << third << endl;
     }
-    cout << top << second << third << endl;
-    cout << "S VECTOR: " << S[0] << S[1] << S[2] << endl;
-    string one = "#z";
-    string two = "#cs4all";
-
-    if (one < two) {
-        cout << "LESS THAN" << endl;
-    }
-    cout << E[top].hashtag << endl;
-
-
-    // if (top != -1) {
-    //     S.push_back(top);
-    // }
-    // if (second != -1) {
-    //     S.push_back(second);
-    // }
-    // if (third != -1) {
-    //     S.push_back(third);
-    // }
 }
 
 int Trendtracker::popularity(string name) {
@@ -138,20 +105,19 @@ string Trendtracker::top_trend() {
 }
 
 void Trendtracker::top_three_trends(vector<string> &T) {
-
+    T.clear();
     int top = S[0];
     int second = S[1];
     int third = S[2];
+    cout << top << " | " <<  second << " | " << third << endl;
 
-    if (top != -1) {
+    if (E.size() == 1) {
         T.push_back(E[top].hashtag);
+        return;
     }
-    if (second != -1) {
-        T.push_back(E[second].hashtag);
-    }
-    if (third != -1) {
-        T.push_back(E[third].hashtag);
-    }
+    T.push_back(E[top].hashtag);
+    T.push_back(E[second].hashtag);
+    T.push_back(E[third].hashtag);
 }
 
 
