@@ -119,6 +119,3 @@ void Trendtracker::top_three_trends(vector<string> &T) {
     T.push_back(E[second].hashtag);
     T.push_back(E[third].hashtag);
 }
-
-
-
