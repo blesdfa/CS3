@@ -10,7 +10,7 @@ private:
 		node* next;
 		node* prev;
 
-		node(int x) {
+		node(T x) {
 			next = nullptr;
 			prev = nullptr;
 			data = x;
@@ -48,10 +48,10 @@ public:
 	}
 
 	//remove and return first item from queue
-	int dequeue()
+	T dequeue()
 	{
 		node* temp = head;
-		int num = head->data;
+		T num = head->data;
 		head = head->next;
 		delete temp;
 		return num;
@@ -71,25 +71,22 @@ public:
 	//For the final part of the test program, template this class
 	//and add a decimate method.
 	void decimate() {
-		int count = 1;
-		int times = 1;
+		int count = 0;
+		// int times = 1;
 		node* tracker = head;
 		while (tracker != nullptr) {
-			if (count / (10 * times) == 1) {
+			count++;
+			if (count % 10 == 0) {
 				if (tracker->next == nullptr) {
-					tail = tail->next;
-					delete tracker;
+					tail = tail->prev;
+					tail->next = nullptr;
 				}
 				else {
-					tracker->next->prev = tracker->prev;
 					tracker->prev->next = tracker->next;
-					delete tracker;
+					tracker->next->prev = tracker->prev;
 				}
-				times++;
-				count++;
 			} 
+			tracker = tracker->next;
 		}
 	}
-
-
 };

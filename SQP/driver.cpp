@@ -129,28 +129,28 @@ int main()
 		cout << qx.dequeue() << endl;
 
 
-	// queueLL<string> qy;
-	// qy.enqueue("sparticus");
-	// qy.enqueue("maximus");
-	// qy.enqueue("killicus");
-	// qy.enqueue("awesomeicus");
-	// qy.enqueue("gannicus");
-	// qy.enqueue("varro");
-	// qy.enqueue("oenomous");
-	// qy.enqueue("slayicus");
-	// qy.enqueue("bladeicus");
-	// qy.enqueue("ted");
-	// qy.enqueue("smashicus");
-	// qy.enqueue("mallicus");
-	// qy.enqueue("wussicus");
-	// qy.enqueue("wimpicus");
-	// qy.enqueue("crixus");
+	queueLL<string> qy;
+	qy.enqueue("sparticus");
+	qy.enqueue("maximus");
+	qy.enqueue("killicus");
+	qy.enqueue("awesomeicus");
+	qy.enqueue("gannicus");
+	qy.enqueue("varro");
+	qy.enqueue("oenomous");
+	qy.enqueue("slayicus");
+	qy.enqueue("bladeicus");
+	qy.enqueue("ted");
+	qy.enqueue("smashicus");
+	qy.enqueue("mallicus");
+	qy.enqueue("wussicus");
+	qy.enqueue("wimpicus");
+	qy.enqueue("crixus");
 
-	// qy.decimate();
+	qy.decimate();
 
-	// //Everyone but Ted.
-	// while( ! qy.empty() )
-	// 	cout << qy.dequeue() << endl;
+	//Everyone but Ted.
+	while( ! qy.empty() )
+		cout << qy.dequeue() << endl;
 
 	return 0;
 }
