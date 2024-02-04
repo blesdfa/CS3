@@ -1,5 +1,11 @@
 //Implement a (singly or doubly) linked list that supports
 //the following methods.
+#include "linkedListSort.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <chrono>
+using namespace std;
 int main()
 {
 	linkedList<double> A;
@@ -59,21 +65,29 @@ int main()
 	//loadFromFile should open the file of the specified name and
 	//enter each item (words in the novel "Moby Dick" in this case)
 	//in the linked list.
+	auto start1 = chrono::high_resolution_clock::now();
 	B.loadFromFile("whale.txt");
+	B.slowSort();
+	B.writeToFile("slowSortedWhale.txt");
+	auto stop1 = chrono::high_resolution_clock::now();
+	auto duration1 = chrono::duration_cast<chrono::seconds>(stop1 - start1);
+	cout << "Time taken to sort using slow method: " << duration1.count() << " seconds" << endl;
+	
+	auto start2 = chrono::high_resolution_clock::now();
 	C.loadFromFile("whale.txt");
 
 	//This line will sort all the words in the novel Moby Dick.
 	//You are encouraged to write some testing code to ensure that
 	//both lists are identical after sorting.
-	B.slowSort();
 	C.mergeSort();
 
 	//writeToFile should write each item in the linked list to the provided output file.
 	//In this example, it should write all the words from Moby Dick to the provided output file in sorted order.
 	//Double check to see if the two files below are properly sorted.
-	B.writeToFile("slowSortedWhale.txt");
 	C.writeToFile("mergeSortedWhale.txt");
-
+	auto stop2 = chrono::high_resolution_clock::now();
+	auto duration2 = chrono::duration_cast<chrono::milliseconds>(stop2 - start2);
+	cout << "Time taken to sort using slow method: " << duration1.count() << " ms" << endl;
 
 	//For your running time report, test each
 	//sort one at a time by timing the entire process
