@@ -55,78 +55,78 @@ int main()
 
 	//////////Test code for queue ///////////
 
-	// queueLL Q;
+	queueLL<int> Q;
 
-	// Q.enqueue(1);
-	// Q.enqueue(2);
-	// Q.enqueue(3);
-	// cout << "Dequeuing: " << Q.dequeue() << endl; //1
-	// cout << "Dequeuing: " << Q.dequeue() << endl; //2
-	// Q.enqueue(4);
-	// Q.enqueue(5);
+	Q.enqueue(1);
+	Q.enqueue(2);
+	Q.enqueue(3);
+	cout << "Dequeuing: " << Q.dequeue() << endl; //1
+	cout << "Dequeuing: " << Q.dequeue() << endl; //2
+	Q.enqueue(4);
+	Q.enqueue(5);
 
-	// //3 4 5
-	// while( ! Q.empty() )
-	// {
-	// 	cout << "Dequeuing: " << Q.dequeue() << endl;
-	// }
+	//3 4 5
+	while( ! Q.empty() )
+	{
+		cout << "Dequeuing: " << Q.dequeue() << endl;
+	}
 
-	// /////////////////////////////////////////
+	/////////////////////////////////////////
 
 
 
 	// //////////Test code for priority queue/////
 
-	// priorityQueueLL<int> pQueue;
+	priorityQueueLL<int> pQueue;
 
-	// const int SIZE = 20;
+	const int SIZE = 20;
 
-	// //insert a bunch of random numbers
-	// for(int i=0; i<SIZE; i++)
-	// {
-	// 	pQueue.insert( rand() );
-	// }
+	//insert a bunch of random numbers
+	for(int i=0; i<SIZE; i++)
+	{
+		pQueue.insert( rand() );
+	}
 
-	// //pull them back out..
-	// //They must come out in order from smallest to largest
-	// while( ! pQueue.empty() )
-	// {
-	// 	cout << pQueue.extractMin() << endl;
-	// }
+	// pull them back out..
+	// They must come out in order from smallest to largest
+	while( ! pQueue.empty() )
+	{
+		cout << pQueue.extractMin() << endl;
+	}
 
 
-	// priorityQueueLL<string> pqs;
+	priorityQueueLL<string> pqs;
 
-	// pqs.insert("whale");
-	// pqs.insert("snake");
-	// pqs.insert("buffalo");
-	// pqs.insert("elmo");
-	// pqs.insert("fire");
-	// pqs.insert("waffle");
+	pqs.insert("whale");
+	pqs.insert("snake");
+	pqs.insert("buffalo");
+	pqs.insert("elmo");
+	pqs.insert("fire");
+	pqs.insert("waffle");
 
-	// //buffalo elmo fire snake waffle whale
-	// while( ! pqs.empty() )
-	// {
-	// 	cout << pqs.extractMin() << endl;
-	// }
+	//buffalo elmo fire snake waffle whale
+	while( ! pqs.empty() )
+	{
+		cout << pqs.extractMin() << endl;
+	}
 
 	// ///////////////////////////////////////////
 	// //1) Template your queue class
 	// //2) Add a decimate method to your queue class
 	// // Note: You will need to modify the earlier test code
 	// //       after you template the class.
-	// queueLL<int> qx;
+	queueLL<int> qx;
 
-	// for(int i=1; i<=100; i++)
-	// 	qx.enqueue( i );
+	for(int i=1; i<=100; i++)
+		qx.enqueue( i );
 
-	// //Eliminate every 10th item from list
-	// //https://en.wikipedia.org/wiki/Decimation_(punishment)
-	// qx.decimate();
+	//Eliminate every 10th item from list
+	//https://en.wikipedia.org/wiki/Decimation_(punishment)
+	qx.decimate();
 
-	// //1 2 3 4 5 6 7 8 9 11 12 13 14 15 16 17 18 19 21 22... 98 99
-	// while( ! qx.empty() )
-	// 	cout << qx.dequeue() << endl;
+	//1 2 3 4 5 6 7 8 9 11 12 13 14 15 16 17 18 19 21 22... 98 99
+	while( ! qx.empty() )
+		cout << qx.dequeue() << endl;
 
 
 	// queueLL<string> qy;
