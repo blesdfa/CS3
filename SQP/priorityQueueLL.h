@@ -38,6 +38,7 @@ public:
 	}
 
 	//return true if empty, false if not
+	// Runs in O(1)
 	bool empty()
 	{
 		if (head) {
@@ -50,6 +51,7 @@ public:
 	}
 
 	//add item
+	// Runs in O(1)
 	void insert(T x)
 	{
 		node* baby = new node(x);
@@ -66,6 +68,7 @@ public:
 	}
 
 	//remove and return smallest item
+	// Runs in O(n)
 	T extractMin()
 	{
 		node* smallest = head;
@@ -105,13 +108,4 @@ public:
 		delete smallest;
 		return vals;
 	}
-
-	void display() {
-		node* tracker = head;
-		while (tracker->next != nullptr) {
-			cout << tracker->data << endl;
-			tracker = tracker->next;
-		}
-	}
-
 };
