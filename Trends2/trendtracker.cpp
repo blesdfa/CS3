@@ -23,7 +23,7 @@ Trendtracker::Trendtracker(string filename) {
 
 int Trendtracker::search(string ht) {
     int s = 0;
-    int e = E.size();
+    int e = E.size() - 1;
 
     while (s <= e) {
         int m = (s + e) / 2;
@@ -31,7 +31,7 @@ int Trendtracker::search(string ht) {
             return m;
         }
         
-        if (ht < E[m].hashtag) {
+        else if (ht < E[m].hashtag) {
             e = m - 1;
         }
         else {
