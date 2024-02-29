@@ -49,7 +49,13 @@ public:
 	// Instead, only search regions of the tree for which a completion could
 	// be present, which will yield a run time bound of O(k log n ) time,
 	// where k is the number of completions in the tree.
-	void completions(string x, vector<string> &T) {}
+	void completions(string x, vector<string> &T) {
+		completions_recurse(x, root, T);
+		cout << T[0] << " " << T[1] << " " << T[2] << endl;
+		// for (auto x : T) {
+		// 	cout << x << endl;
+		// }
+	}
 
 	//Reports height of the AVL tree, runs in O(1) time.
 	int height()
@@ -118,7 +124,44 @@ private:
 	}
 
 	// Fills C with the completions of x in the BST rooted at p.
-	void completions_recurse(string x, Node* p, vector<Entry> &C);
+	void completions_recurse(string x, Node* p, vector<string> &C) { //CHANGED ENTRY TO STRING
+		int top = 0;
+		int second = 0;
+		int third = 0;
+		C[0] = "";
+		C[1] = "";
+		C[2] = "";
+
+		if (!p) {
+			return;
+		}
+		else if (x < p->e.s) {
+			if (p->e.s[0] == x[0]) {
+				C.push_back(p->e.s);
+				if (p->e.freq > top) {
+					third = second;
+					second = top;
+					top = p->e.freq;
+					C[2] = C[1];
+					C[1] = C[0];
+					C[0] = p->e.s;
+				}
+				else if (p->e.freq > second) {
+					third = second;
+					second = p->e.freq;
+					C[2] = C[1];
+					C[1] = p->e.s;
+				}
+			}
+			completions_recurse(x, p->left, C);
+		}
+		else {
+			if (p->e.s[0] == x[0]) {
+				C.push_back(p->e.s);
+			}
+			completions_recurse(x, p->left, C);
+		}
+	}
 
 	// Inserts an Entry into an AVL tree rooted at p.
 	//
@@ -167,7 +210,7 @@ private:
 	//
 	// Should run in O(1) time.
 	void rebalance(Node* &p, string type) {
-
+		
     }
 
 	// Perform left and right rotations

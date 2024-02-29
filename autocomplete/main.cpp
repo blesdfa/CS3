@@ -115,11 +115,11 @@ int main()
 	test(animals.height() == 4);
 
 	// // Test completions()
-	// animals.completions("a", R);
-	// test(R.size() == 3);
-	// test(R[0] == "alpaca");
-	// test(R[1] == "aardvark");
-	// test(R[2] == "albatross");
+	animals.completions("a", R);
+	test(R.size() == 3);
+	test(R[0] == "alpaca");
+	test(R[1] == "aardvark");
+	test(R[2] == "albatross");
 
 	// animals.completions("b", R);
 	// test(R.size() == 2);
