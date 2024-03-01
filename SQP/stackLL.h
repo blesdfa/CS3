@@ -29,15 +29,14 @@ public:
         head = nullptr;
     }
 
-	//Take care of memory leaks...
-	// ~stackLL()
-	// {
-    //     while (top) {
-    //         pop();
-    //     }
-    // }
+	// Take care of memory leaks...
+	~stackLL()
+	{
+
+    }
 
 	//return true if empty, false if not
+    // Runs in O(1)
 	bool empty()
 	{
         if (top) {
@@ -50,6 +49,7 @@ public:
     }
 
 	//add item to top of stack
+    //runs in O(1)
 	void push(int x)
 	{
         node* baby = new node(x);
@@ -66,6 +66,7 @@ public:
     }
 
 	//remove and return top item from stack
+    //Runs in O(1)
 	int pop()
 	{
         int num = top->data;
@@ -79,6 +80,7 @@ public:
 	//right after the current ith item from the top
 	//(and before the i+1 item).
     // output order: -300,30,25,20,-100,15,10,5,-200
+    //Runs in O(n)
 	void insertAt(int x, int i)
 	{
         // Edge case to just push if wanted at the top of the stack
@@ -104,14 +106,4 @@ public:
         tracker->next->prev = baby;
         tracker->next = baby;
     }
-
-    void display() {
-        node* tracker = top;
-        while (tracker != nullptr) {
-            cout << tracker->data << " ";
-            tracker = tracker->prev;
-        }
-        cout << endl;
-    }
-
 };

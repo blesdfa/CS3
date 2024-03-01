@@ -33,6 +33,7 @@ public:
 	}
 
 	//add item to back of queue
+	// runs in O(1)
 	void enqueue(T x)
 	{
 		node* baby = new node(x);
@@ -48,6 +49,7 @@ public:
 	}
 
 	//remove and return first item from queue
+	// runs in O(1)
 	T dequeue()
 	{
 		node* temp = head;
@@ -58,6 +60,7 @@ public:
 	}
 
 	//return true if empty, false otherwise.
+	// Runs in O(1)
 	bool empty()
 	{
 		if (head == nullptr) {
@@ -70,6 +73,7 @@ public:
 
 	//For the final part of the test program, template this class
 	//and add a decimate method.
+	// Runs in O(n)
 	void decimate() {
 		int count = 0;
 		// int times = 1;
