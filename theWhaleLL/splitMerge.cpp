@@ -87,7 +87,7 @@ int main()
 	C.writeToFile("mergeSortedWhale.txt");
 	auto stop2 = chrono::high_resolution_clock::now();
 	auto duration2 = chrono::duration_cast<chrono::milliseconds>(stop2 - start2);
-	cout << "Time taken to sort using slow method: " << duration1.count() << " ms" << endl;
+	cout << "Time taken to sort using slow method: " << duration2.count() << " ms" << endl;
 
 	//For your running time report, test each
 	//sort one at a time by timing the entire process
