@@ -29,7 +29,6 @@ class Autocompleter
 		// Must run in O(1) time.
 		int size();
 
-        void check(string x, vector<string> &R);
 
 		// Fills the vector T with the three most-frequent completions of x.
 		// If x has less than three completions, then 

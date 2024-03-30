@@ -26,7 +26,7 @@ void Autocompleter::insert(string x, int freq) {
     if (root->top.size() > 3) {
         root->top.pop_back();
     }
-
+    
     Node* temp = root; // logic for every other node just using simple track and pop from previous assignments 
     for (int i = 0; i < x.size(); i++)
     {
