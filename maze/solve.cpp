@@ -46,7 +46,7 @@ void bfs(string s, unordered_map<string, Vertex*> &m) {
     }
 }
 
-string shortestPath(string start, string end, unordered_map<string, Vertex*> &m) {
+void shortestPath(string start, string end, unordered_map<string, Vertex*> &m) {
 
     //Step 0: Get the start/end vertices
     Vertex* sPtr = m[start];
@@ -70,11 +70,8 @@ string shortestPath(string start, string end, unordered_map<string, Vertex*> &m)
             current->path = true;
             current = current->bc;
         }
-    } else {
-        output = "No path exists";
     }
-
-    return output;
+    // return output;
 }
 
 
@@ -104,23 +101,21 @@ string solve(string maze) {
         }
         counter++;
     }
-    // cout << maxRows << " by " << maxCols << endl;
-
     for(auto x : maze) {
         // cout << "[" << r << "]" << "[" << c << "]";
         if (x == ' ') {
             Vertex* v = new Vertex(r, c);
-            string pos = to_string(r) + to_string(c);
+            string pos = to_string(r) + "," + to_string(c); // was failing on the biggest 18 by 40 maze because r,c 1,11 is the same as 11, 1 so the comma is neccesary took forever to debug
             m[pos] = v;
-            if (r != 0 and c != 0) { //check left of pos
-                leftPos = to_string(r) + to_string(c - 1);
+            if (c != 0) { //check left of pos
+                leftPos = to_string(r) + "," + to_string(c - 1);
                 if (m.find(leftPos) != m.end()) {
                     addBasicEdge(pos, leftPos, m);
                 }
             }
 
             if (r != 0) { //check above current pos
-                upPos = to_string(r - 1) + to_string(c);
+                upPos = to_string(r - 1) + "," + to_string(c);
                 if (m.find(upPos) != m.end()) {
                     addBasicEdge(pos, upPos, m);
                 }
@@ -129,17 +124,16 @@ string solve(string maze) {
 
         if (x == ' ') {
             if (flag == 0 && (c == 0 || r == 0 || c == maxCols - 1 || r == maxRows - 1)) {
-                startPos = to_string(r) + to_string(c);
+                startPos = to_string(r) + "," + to_string(c);
                 flag++;
             }
             else if (flag == 1 && (c == 0 || r == 0 || c == maxCols - 1 || r == maxRows - 1)) { //check all possible
-                endPos = to_string(r) + to_string(c);
+                endPos = to_string(r) + "," + to_string(c);
                 flag++;
             }
         }
 
         if (x == '\n') {
-            cout << "\n";
             r++;
             c = -1;
         }
@@ -151,21 +145,18 @@ string solve(string maze) {
     c = 0;
     string testing = "";
     int verCount = 0;
-    // for (auto x : m) {
-    //     cout << x.second->row << x.second->col << endl;
-    //     verCount++;
-    // }
-    // cout << verCount;
-    // bfs(endPos, m);
-    cout << shortestPath(startPos, endPos, m) << endl;
+
+    shortestPath(startPos, endPos, m);
+
     for (auto x : maze) {
         if (x == '\n') {
             r++;
             c = -1;
             testing = testing + x;
         }
+
         if (x == ' ') {
-            string pos = to_string(r) + to_string(c);
+            string pos = to_string(r) + "," + to_string(c);
             Vertex* checker = m[pos];
             if (checker->path) {
                 testing = testing + "o";
@@ -174,15 +165,15 @@ string solve(string maze) {
                 testing = testing + x;
             }
         }
-
         if (x == '#') {
             testing = testing + x;
         }
         c++;
     }
     maze = testing;
-    for (auto x : maze) {
-        cout << x;
-    }
+    // for (auto x : maze) {
+    //     cout << x;
+    // }
+    
     return maze;
 }
