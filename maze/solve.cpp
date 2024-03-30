@@ -10,7 +10,6 @@ void clearData(unordered_map<string, Vertex*> &m) {
 			x.second->marked =false;
 			x.second->bc = nullptr;
             x.second->path = false;
-            cout << "clearing data" << endl;
 		}
 }
 
@@ -29,15 +28,10 @@ void addBasicEdge(string a, string b, unordered_map<string, Vertex*> &m) {
 void bfs(string s, unordered_map<string, Vertex*> &m) {
     clearData(m);
     Vertex* start = m[s];
-    cout << "check 1" << endl;
     queue<Vertex*> q;
-    cout << "check" << endl;
     q.push(start);
-    cout << "check 3" << endl;
     start->marked = true;
-    cout << "check 4" << endl;
     
-
     while(!q.empty()) {
         Vertex* temp = q.front();
         q.pop();
@@ -73,7 +67,6 @@ string shortestPath(string start, string end, unordered_map<string, Vertex*> &m)
     if (current->marked) {
         while (current != nullptr)
         {
-            output = "[" + to_string(current->row) + "]" + "[" + to_string(current->col) + "]" + output;
             current->path = true;
             current = current->bc;
         }
@@ -111,10 +104,10 @@ string solve(string maze) {
         }
         counter++;
     }
-    cout << maxRows << " by " << maxCols << endl;
+    // cout << maxRows << " by " << maxCols << endl;
 
     for(auto x : maze) {
-        cout << "[" << r << "]" << "[" << c << "]";
+        // cout << "[" << r << "]" << "[" << c << "]";
         if (x == ' ') {
             Vertex* v = new Vertex(r, c);
             string pos = to_string(r) + to_string(c);
@@ -135,16 +128,13 @@ string solve(string maze) {
         }
 
         if (x == ' ') {
-            if (c == 0 || r == 0) {
+            if (flag == 0 && (c == 0 || r == 0 || c == maxCols - 1 || r == maxRows - 1)) {
                 startPos = to_string(r) + to_string(c);
                 flag++;
-                cout << "found opening" << startPos;
             }
-
-            if (c == maxCols - 1 || r == maxRows - 1) {
+            else if (flag == 1 && (c == 0 || r == 0 || c == maxCols - 1 || r == maxRows - 1)) { //check all possible
                 endPos = to_string(r) + to_string(c);
                 flag++;
-                cout << "found opening" << endPos;
             }
         }
 
@@ -166,26 +156,30 @@ string solve(string maze) {
     //     verCount++;
     // }
     // cout << verCount;
-    bfs(startPos, m);
-    // cout << shortestPath(startPos, endPos, m) << endl;
-    // for (auto x : maze) {
-    //     if (x == '\n') {
-    //         r++;
-    //         c = -1;
-    //         testing = testing + x;
-    //     }
-    //     if (x == ' ') {
-    //         Vertex* checker = m[startPos];
-    //         if (checker->path) {
-    //             testing = testing + "o";
-    //         }
-    //     }
+    // bfs(endPos, m);
+    cout << shortestPath(startPos, endPos, m) << endl;
+    for (auto x : maze) {
+        if (x == '\n') {
+            r++;
+            c = -1;
+            testing = testing + x;
+        }
+        if (x == ' ') {
+            string pos = to_string(r) + to_string(c);
+            Vertex* checker = m[pos];
+            if (checker->path) {
+                testing = testing + "o";
+            }
+            else {
+                testing = testing + x;
+            }
+        }
 
-    //     if (x == '#') {
-    //         testing = testing + x;
-    //     }
-    //     c++;
-    // }
+        if (x == '#') {
+            testing = testing + x;
+        }
+        c++;
+    }
     maze = testing;
     for (auto x : maze) {
         cout << x;
