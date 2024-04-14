@@ -14,6 +14,7 @@ class Vertex
                         marked = false;
                         path = false;
                         Vertex* bc = nullptr;
+                        int weight = 0;
                 }
 
                 // Corresponding row and column location in maze
@@ -21,8 +22,10 @@ class Vertex
                 int col;
 
                 // List of neighboring vertices
-                vector<Vertex*> neighs;
+                vector<pair<Vertex*, int>> neighs;
+                // vector<Vertex*> neighs;
                 bool marked;
                 Vertex* bc;
                 bool path;
+                int weight;
 };

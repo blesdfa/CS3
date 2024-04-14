@@ -6,6 +6,7 @@
 #include <unordered_set>
 #include <queue>
 #include <unordered_map>
+#include "minpriorityqueue.h"
 
 using namespace std;
 

@@ -2,6 +2,9 @@
 #include <utility>
 #include "vertex.h"
 #include "solve.h"
+#include "minpriorityqueue.h"
+#include "limits.h"
+#define toDigit(c) (c-'0')
 using namespace std;
 
 void clearData(unordered_map<string, Vertex*> &m) {
@@ -13,16 +16,18 @@ void clearData(unordered_map<string, Vertex*> &m) {
 		}
 }
 
-void addDirectedEdge(string a, string b, unordered_map<string, Vertex*> &m) {
+void addDirectedEdge(string a, string b, unordered_map<string, Vertex*> &m, int w) {
     Vertex* aptr = m[a]; //O(1) a.c.
     Vertex* bptr = m[b];  //O(1) a.c.
 
-    aptr->neighs.push_back(bptr);
+    pair<Vertex*, int> newPair = make_pair(bptr, w);
+    aptr->neighs.push_back(newPair);
+
 }
 
-void addBasicEdge(string a, string b, unordered_map<string, Vertex*> &m) {
-    addDirectedEdge(a, b, m);
-    addDirectedEdge(b, a, m);
+void addBasicEdge(string a, string b, unordered_map<string, Vertex*> &m, int w) {
+    addDirectedEdge(a, b, m, w);
+    addDirectedEdge(b, a, m, w);
 }
 
 void bfs(string s, unordered_map<string, Vertex*> &m) {
@@ -37,46 +42,85 @@ void bfs(string s, unordered_map<string, Vertex*> &m) {
         q.pop();
 
         for (auto x : temp->neighs) {
-            if (!x->marked) {
-                x->marked = true;
-                q.push(x);
-                x->bc = temp;
+            if (!x.first->marked) {
+                x.first->marked = true;
+                q.push(x.first);
+                x.first->bc = temp;
             }
         }
     }
 }
 
+void dijsktras(unordered_map<string, Vertex*> &m, string s) {
+    MinPriorityQueue<Vertex*> pq;
+    for (auto x : m) {
+        if (x.first == s) {
+            pq.push(x.second, 0);
+            // cout << "start vertex: " << s << endl;
+        }
+        else {
+            x.second->weight = INT_MAX;
+            pq.push(x.second, x.second->weight);
+            // cout << "other vertex: " << x.first << endl;
+        }
+    }
+
+    while(pq.size() != 0) {
+        Vertex* x = pq.front();
+        pq.pop();
+
+        for (auto n : x->neighs) {
+            if (x->weight + n.second < n.first->weight) {
+                // cout << "updating weight" << endl;
+                // cout << pq.size() << endl;
+                n.first->weight = x->weight + n.second;
+                n.first->bc = x;
+                pq.decrease_key(n.first,n.first->weight);
+            }
+        }
+    }
+
+    // for (auto x : m) {
+    //     cout << x.second->row << ", " << x.second->col << ": " << x.second->bc->row << ", " << x.second->bc->col << endl;
+    // }
+    // for (auto x : m) {
+    //     cout << x.second->row << ", " << x.second->col << ": " << x.second->weight << endl;
+    // }
+}
 void shortestPath(string start, string end, unordered_map<string, Vertex*> &m) {
 
     //Step 0: Get the start/end vertices
     Vertex* sPtr = m[start];
     Vertex* ePtr = m[end];
+    sPtr->bc = nullptr;
 
     //Step 1: Run BFS on start vertex
     //to properly set breadcrumbs poineters
     //encoding shortest paths.
-    bfs(start, m);
+    // bfs(start, m);
+    dijsktras(m, start);
+    // cout << "check 2" << endl;
 
     //Step 2: Start at ePtr, following breadcrumbs
     //back to sPtr, return path of vertices you
     //visit.
-    string output;
 
     Vertex* current = ePtr;
 
-    if (current->marked) {
         while (current != nullptr)
         {
             current->path = true;
             current = current->bc;
         }
-    }
-    // return output;
 }
+
+
 
 
 string solve(string maze) {
     unordered_map<string, Vertex*> m;
+    clearData(m);
+    unordered_map<char, string> p;
 
     int c = 0;
     int r = 0;
@@ -103,22 +147,30 @@ string solve(string maze) {
     }
     for(auto x : maze) {
         // cout << "[" << r << "]" << "[" << c << "]";
-        if (x == ' ') {
+        if (x == ' ' || (x >= '0' && x <= '9')) {
             Vertex* v = new Vertex(r, c);
             string pos = to_string(r) + "," + to_string(c); // was failing on the biggest 18 by 40 maze because r,c 1,11 is the same as 11, 1 so the comma is neccesary took forever to debug
             m[pos] = v;
             if (c != 0) { //check left of pos
                 leftPos = to_string(r) + "," + to_string(c - 1);
                 if (m.find(leftPos) != m.end()) {
-                    addBasicEdge(pos, leftPos, m);
+                    addBasicEdge(pos, leftPos, m, 1);
                 }
             }
 
             if (r != 0) { //check above current pos
                 upPos = to_string(r - 1) + "," + to_string(c);
                 if (m.find(upPos) != m.end()) {
-                    addBasicEdge(pos, upPos, m);
+                    addBasicEdge(pos, upPos, m, 1);
                 }
+            }
+
+            if (x >= '0' && x <= '9') {
+                if (p.find(x) != p.end()) {
+                    endPos = p[x];
+                    addBasicEdge(pos, endPos, m, toDigit(x));
+                }
+                p[x] = pos;
             }
         }
 
@@ -147,6 +199,11 @@ string solve(string maze) {
     int verCount = 0;
 
     shortestPath(startPos, endPos, m);
+    // for (auto x : m) {
+    //     if (x.second->marked) {
+    //         cout << x.second->row << ", " << x.second->col << endl;
+    //     }
+    // }
 
     for (auto x : maze) {
         if (x == '\n') {
@@ -165,15 +222,34 @@ string solve(string maze) {
                 testing = testing + x;
             }
         }
+
+        if (x >= '0' && x <= '9') {
+            string pos = to_string(r) + "," + to_string(c);
+            Vertex* checker = m[pos];
+            if (checker->path) {
+                testing = testing + "o";
+            }
+            else {
+                testing = testing + x;
+            }
+        }
         if (x == '#') {
             testing = testing + x;
         }
         c++;
     }
     maze = testing;
-    // for (auto x : maze) {
-    //     cout << x;
+    for (auto x : maze) {
+        cout << x;
+    }
+
+    // for (auto x : m) {
+    //     cout << x.first << ": ";
+    //     for (auto i : x.second->neighs) {
+    //         // cout << i.first->row << " " <<  i.first->col << ", ";
+    //         cout << i.second << ",";
+    //     }
+    //     cout << endl;
     // }
-    
     return maze;
 }
