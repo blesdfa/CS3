@@ -13,4 +13,13 @@ class Vertex
                 // Map of neighbors to weights.
                 // If vertex is part of an unweighted graph, then unused.
                 unordered_map<Vertex*, int> weights;
+
+                bool color;
+                string pos;
+
+                Vertex(bool col, string p) {
+                        color = col;
+                        pos = p;
+                }
+                Vertex() {};
 };

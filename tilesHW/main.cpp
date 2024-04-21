@@ -18,7 +18,7 @@ inline void _test(const char* expression, const char* file, int line)
 int main()
 {
 	// Setup
-        srand(2024 + 's');
+    srand(2024 + 's');
 	string floor;
 
 
@@ -87,11 +87,11 @@ int main()
 
     floor = "";
     floor += "########\n";
-    floor += "## ## ##\n";
-    floor += "#      #\n";
-    floor += "## ## ##\n";
-    floor += "########\n";
-    test(!has_tiling(floor));
+	floor += "## ## ##\n";
+	floor += "#      #\n";
+	floor += "## ## ##\n";
+	floor += "########\n";
+	test(!has_tiling(floor));
 
 	floor = "";
 	floor += "#####\n";
